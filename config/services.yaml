@@ -25,3 +25,7 @@ services:
     App\Service\UnicornPurchaseService:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
+
+    App\Service\UnicornPurchaseMailer:
+        arguments:
+            $mailer: '@mailer.mailer'
