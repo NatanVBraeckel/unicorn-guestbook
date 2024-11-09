@@ -16,7 +16,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new GetCollection(),
-        new ApiPost(),
+        new ApiPost(
+            denormalizationContext: ['groups' => ['post:create']]
+        ),
         new Delete(),
         new Patch(
             denormalizationContext: ['groups' => ['post:update']]
@@ -31,10 +33,11 @@ class Post
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['post:update'])]
+    #[Groups(['post:create', 'post:update'])]
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['post:create'])]
     private ?string $author = null;
 
     #[ORM\Column]
@@ -42,6 +45,7 @@ class Post
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['post:create'])]
     private ?Unicorn $unicorn = null;
 
     public function getId(): ?int
