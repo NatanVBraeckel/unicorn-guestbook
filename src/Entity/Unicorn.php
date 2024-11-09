@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post as ApiPost;
+use ApiPlatform\OpenApi\Model\Operation;
 use App\Controller\UnicornPurchaseController;
 use App\Repository\UnicornRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,8 +20,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
         new GetCollection(),
         new ApiPost(
             name: 'purchase',
-            uriTemplate: '/unicorn/{id}/purchase',
+            description: 'Purchases a Unicorn.',
+            uriTemplate: '/unicorns/{id}/purchase',
             controller: UnicornPurchaseController::class,
+            openapi: new Operation(
+                summary: 'Purchases a Unicorn.',
+                description: 'Sends an email containing all posts linked to this unicorn and removes all those posts.',
+            )
         )
     ]
 )]
