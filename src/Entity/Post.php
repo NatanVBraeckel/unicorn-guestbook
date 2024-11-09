@@ -3,11 +3,25 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post as ApiPost;
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new ApiPost(),
+        new Delete(),
+        new Patch(
+            denormalizationContext: ['groups' => ['post:update']]
+        ),
+    ]
+)]
 class Post
 {
     #[ORM\Id]
@@ -16,6 +30,7 @@ class Post
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['post:update'])]
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
