@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\UnicornRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +12,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UnicornRepository::class)]
 #[UniqueEntity(fields: ['name'], message: 'This name for a unicorn is already taken.')]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+    ]
+)]
 class Unicorn
 {
     #[ORM\Id]
