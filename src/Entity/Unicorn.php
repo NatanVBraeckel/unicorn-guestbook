@@ -23,6 +23,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             description: 'Purchases a Unicorn.',
             uriTemplate: '/unicorns/{id}/purchase',
             controller: UnicornPurchaseController::class,
+            input: false,
             openapi: new Operation(
                 summary: 'Purchases a Unicorn.',
                 description: 'Sends an email containing all posts linked to this unicorn and removes all those posts.',
