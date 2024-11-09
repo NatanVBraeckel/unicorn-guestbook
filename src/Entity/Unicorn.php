@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post as ApiPost;
+use App\Controller\UnicornPurchaseController;
 use App\Repository\UnicornRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,6 +17,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ApiResource(
     operations: [
         new GetCollection(),
+        new ApiPost(
+            name: 'purchase',
+            uriTemplate: '/unicorn/{id}/purchase',
+            controller: UnicornPurchaseController::class,
+        )
     ]
 )]
 class Unicorn
