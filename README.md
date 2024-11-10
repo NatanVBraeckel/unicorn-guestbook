@@ -17,13 +17,19 @@ DATABASE_URL="postgresql://postgres:unicorn@127.0.0.1:5432/postgres?serverVersio
 
 MAILER_DSN=smtp://localhost:1025
 
+## Test data
+
 ### Fixture
 
-Ik heb ook een fixture gemaakt om wat data toe te voegen om de API te testen. Dit kan met het commando:
+Ik heb een fixture gemaakt om wat data toe te voegen om de API te testen. Dit kan met het commando:
 
 ```bash
 php bin/console doctrine:fixtures:load
 ```
+
+### Database dump
+
+In de repo heb ik ook *unicorn_guestbook_dump.sql* toegevoegd. Met deze dump kan je eventueel ook de database vullen.
 
 ## De API
 
