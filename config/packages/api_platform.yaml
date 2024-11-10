@@ -1,5 +1,7 @@
 api_platform:
     title: Unicorn Guestbook API
+    description: Documentation for the Unicorn Guestbook API
+    show_webby: false
     version: 1.0.0
     defaults:
         stateless: true
